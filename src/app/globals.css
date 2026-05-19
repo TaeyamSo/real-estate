@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #002147;
+  --gold: #C5A021;
+  --dark: #000d1c;
+  --bg-light: #f8fafc;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-gold: var(--gold);
+  --color-dark: var(--dark);
+  --color-bg-light: var(--bg-light);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 83px;
+}
+
+body {
+  background: var(--bg-light);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ── Cinematic snap wrapper (disabled \u2014 sections use normal page scroll) ── */
+.cinematic-snap {
+  /* scroll-snap-type removed \u2014 inner scroll container broke mouse scrolling */
+}
+
+.snap-section {
+  /* scroll-snap-align removed */
+}
+
+/* ── Floating keyframe (About image) ───────────────── */
+@keyframes float {
+  0%, 100% { transform: rotate(-4deg) translateY(0px); }
+  50%       { transform: rotate(-4deg) translateY(-10px); }
+}
+
+/* ── Ken Burns (chapter breaks) ────────────────────── */
+@keyframes kenBurns {
+  from { transform: scale(1.15); }
+  to   { transform: scale(1.0); }
+}
+
+/* ── Scroll pulse (chapter indicators) ─────────────── */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ── Reduced motion overrides ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-snap {
+    scroll-snap-type: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
