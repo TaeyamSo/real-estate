@@ -20,12 +20,33 @@
 
 html {
   scroll-padding-top: 83px;
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--navy);
 }
 
 body {
   background: var(--bg-light);
   color: var(--navy);
   overflow-x: hidden;
+}
+
+/* ── Custom scrollbar (Webkit) ──────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--navy);
 }
 
 /* ── Cinematic snap wrapper (disabled \u2014 sections use normal page scroll) ── */
