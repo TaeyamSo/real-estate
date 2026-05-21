@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Residents", href: "#residents" },
   { label: "Owners", href: "#owners" },
-  { label: "Available Units", href: "#units" },
+  { label: "Available Units", href: "/units" },
   { label: "Reviews", href: "#reviews" },
 ];
 
@@ -19,6 +20,8 @@ interface NavbarProps {
 export default function Navbar({ onContactOpen }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -30,8 +33,16 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
+    if (href.startsWith("/")) {
+      router.push(href);
+      return;
+    }
     if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (pathname !== "/") {
+        router.push("/");
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
       return;
     }
     const el = document.querySelector(href);
@@ -96,10 +107,13 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
           ))}
           <button
             onClick={() => onContactOpen("tenant")}
-            className="ml-[22px] font-black text-[0.75rem] uppercase tracking-[1px] px-5 py-[10px] rounded-full cursor-pointer transition-all duration-200 hover:bg-white"
+            className="ml-[22px] font-black text-[0.75rem] uppercase tracking-[1px] px-5 py-[10px] rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-150"
             style={{
-              background: "#C5A021",
+              background: "linear-gradient(135deg, #C5A021, #F0D060, #C5A021, #A88010)",
+              backgroundSize: "300% 300%",
               color: "#002147",
+              border: "none",
+              animation: "contactBtnShimmer 2.5s ease-in-out infinite",
             }}
           >
             Contact

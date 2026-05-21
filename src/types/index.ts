@@ -8,8 +8,10 @@ export interface Unit {
   address: string;
   available: string;
   imageUrl: string;
+  images: string[];
   listingUrl: string;
   status: "Available" | "Coming Soon";
+  description?: string;
 }
 
 export interface Review {

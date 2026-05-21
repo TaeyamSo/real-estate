@@ -4,29 +4,18 @@ import { Bed, Bath, Maximize2 } from "lucide-react";
 
 interface UnitCardProps {
   unit: Unit;
+  onClick?: () => void;
 }
 
-export default function UnitCard({ unit }: UnitCardProps) {
-  return (
-    <a
-      href={unit.listingUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block rounded-[20px] overflow-hidden no-underline transition-all duration-300 hover:-translate-y-[6px]"
-      style={{
-        background: "white",
-        color: "inherit",
-        boxShadow: "0 5px 20px rgba(0,0,0,0.06)",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-          "0 15px 35px rgba(0,0,0,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-          "0 5px 20px rgba(0,0,0,0.06)";
-      }}
-    >
+export default function UnitCard({ unit, onClick }: UnitCardProps) {
+  const sharedStyle: React.CSSProperties = {
+    background: "white",
+    color: "inherit",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.06)",
+  };
+
+  const inner = (
+    <>
       {/* Image */}
       <div className="relative h-[160px] overflow-hidden">
         <Image
@@ -53,7 +42,7 @@ export default function UnitCard({ unit }: UnitCardProps) {
         >
           ${unit.price.toLocaleString()} / mo
         </div>
-          <div className="text-[0.8rem] mb-3" style={{ color: "#64748b" }}>
+        <div className="text-[0.8rem] mb-3" style={{ color: "#64748b" }}>
           {unit.address}
         </div>
 
@@ -80,14 +69,54 @@ export default function UnitCard({ unit }: UnitCardProps) {
 
         <div
           className="text-[0.8rem] pt-[14px]"
-          style={{
-            color: "#64748b",
-            borderTop: "1px solid #f0f4f8",
-          }}
+          style={{ color: "#64748b", borderTop: "1px solid #f0f4f8" }}
         >
-          Available: <span className="font-bold" style={{ color: "#002147" }}>{unit.available}</span>
+          Available:{" "}
+          <span className="font-bold" style={{ color: "#002147" }}>
+            {unit.available}
+          </span>
         </div>
       </div>
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        className="block w-full text-left rounded-[20px] overflow-hidden transition-all duration-300 hover:-translate-y-[6px] cursor-pointer"
+        style={{ ...sharedStyle, border: "none", padding: 0 }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "0 15px 35px rgba(0,0,0,0.1)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "0 5px 20px rgba(0,0,0,0.06)";
+        }}
+      >
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <a
+      href={unit.listingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block rounded-[20px] overflow-hidden no-underline transition-all duration-300 hover:-translate-y-[6px]"
+      style={sharedStyle}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+          "0 15px 35px rgba(0,0,0,0.1)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+          "0 5px 20px rgba(0,0,0,0.06)";
+      }}
+    >
+      {inner}
     </a>
   );
 }

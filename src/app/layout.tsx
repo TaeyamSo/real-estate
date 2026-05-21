@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} h-full`}>
+    <html lang="en" className={`${montserrat.variable}`}>
       <body
-        className="min-h-full"
+        className="min-h-screen"
         style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif" }}
       >
         <LenisProvider>{children}</LenisProvider>
