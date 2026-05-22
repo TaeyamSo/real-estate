@@ -29,6 +29,7 @@ body {
   background: var(--bg-light);
   color: var(--navy);
   overflow-x: hidden;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
 /* ── Custom scrollbar (Webkit) ──────────────────────── */

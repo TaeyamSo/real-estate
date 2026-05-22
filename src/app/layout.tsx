@@ -24,10 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable}`}>
-      <body
-        className="min-h-screen"
-        style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif" }}
-      >
+      <body className="min-h-screen">
         <LenisProvider>
           {children}
           <FloatingContactButton />
