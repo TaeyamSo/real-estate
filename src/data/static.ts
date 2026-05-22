@@ -188,6 +188,46 @@ export const staticReviews: Review[] = [
     rating: 5,
     text: "Maintenance requests get answered fast. As a tenant, I always feel taken care of.",
   },
+  {
+    id: "6",
+    name: "Jordan Williams",
+    initial: "J",
+    role: "Verified Tenant",
+    rating: 5,
+    text: "Moving in was seamless — everything was ready on day one. The team handled every detail without me asking.",
+  },
+  {
+    id: "7",
+    name: "Priya Nair",
+    initial: "P",
+    role: "Verified Owner",
+    rating: 5,
+    text: "My vacancy rate dropped to nearly zero since switching to PNE. Outstanding leasing team, couldn't be happier.",
+  },
+  {
+    id: "8",
+    name: "Derek Thompson",
+    initial: "D",
+    role: "Verified Owner",
+    rating: 5,
+    text: "The owner portal gives me full visibility into everything. I always know exactly what's happening with my properties.",
+  },
+  {
+    id: "9",
+    name: "Layla Hassan",
+    initial: "L",
+    role: "Verified Tenant",
+    rating: 5,
+    text: "Responsive, professional, and genuinely caring. Best rental experience I've had in years — truly exceptional.",
+  },
+  {
+    id: "10",
+    name: "Carlos Mendez",
+    initial: "C",
+    role: "Verified Owner",
+    rating: 5,
+    text: "Rent hits my account on time every single month without me lifting a finger. Exactly what I needed.",
+  },
 ];
 
 export const residentServices: Service[] = [

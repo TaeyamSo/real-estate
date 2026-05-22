@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import UnitCard from "@/components/ui/UnitCard";
+import FilterSelect from "@/components/ui/FilterSelect";
 import type { Unit } from "@/types";
 
 const PRICE_RANGES = [
@@ -29,6 +30,10 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
     () => ["any", ...Array.from(new Set(units.map((u) => u.city))).sort()],
     [units]
   );
+  const cityOptions = useMemo(
+    () => cities.map((c) => ({ value: c, label: c === "any" ? "All Locations" : c })),
+    [cities]
+  );
 
   const [city, setCity] = useState("any");
   const [price, setPrice] = useState("any");
@@ -52,20 +57,6 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
     });
   }, [units, city, price, beds]);
 
-  const selectStyle: React.CSSProperties = {
-    padding: "12px 14px",
-    borderRadius: 12,
-    border: "1.5px solid rgba(255,255,255,0.2)",
-    background: "rgba(255,255,255,0.1)",
-    color: "white",
-    fontWeight: 700,
-    fontFamily: "inherit",
-    fontSize: "0.9rem",
-    cursor: "pointer",
-    outline: "none",
-    width: "100%",
-  };
-
   return (
     <section
       id="units"
@@ -77,7 +68,7 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
     >
       {/* Header */}
       <motion.div
-        className="max-w-[1300px] mx-auto mb-5"
+        className="max-w-325 mx-auto mb-5"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -97,7 +88,7 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
 
       {/* Filter bar */}
       <div
-        className="max-w-[1100px] mx-auto mb-4 rounded-[20px] flex gap-[18px] flex-wrap items-end"
+        className="max-w-275 mx-auto mb-4 rounded-[20px] flex gap-4.5 flex-wrap items-end"
         style={{
           background: "rgba(255,255,255,0.06)",
           padding: "14px 18px",
@@ -106,67 +97,28 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
         }}
       >
         {/* Location */}
-        <div className="flex flex-col gap-[6px] flex-1 min-w-[140px]">
-          <label
-            className="text-[0.7rem] font-black tracking-[1.5px] uppercase"
-            style={{ color: "#C5A021" }}
-          >
-            Location
-          </label>
-          <select
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            style={selectStyle}
-          >
-            {cities.map((c) => (
-              <option key={c} value={c}>
-                {c === "any" ? "All Locations" : c}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FilterSelect
+          label="Location"
+          value={city}
+          options={cityOptions}
+          onChange={setCity}
+        />
 
         {/* Price */}
-        <div className="flex flex-col gap-[6px] flex-1 min-w-[140px]">
-          <label
-            className="text-[0.7rem] font-black tracking-[1.5px] uppercase"
-            style={{ color: "#C5A021" }}
-          >
-            Price Range
-          </label>
-          <select
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            style={selectStyle}
-          >
-            {PRICE_RANGES.map((p) => (
-              <option key={p.value} value={p.value}>
-                {p.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FilterSelect
+          label="Price Range"
+          value={price}
+          options={PRICE_RANGES}
+          onChange={setPrice}
+        />
 
         {/* Bedrooms */}
-        <div className="flex flex-col gap-[6px] flex-1 min-w-[140px]">
-          <label
-            className="text-[0.7rem] font-black tracking-[1.5px] uppercase"
-            style={{ color: "#C5A021" }}
-          >
-            Bedrooms
-          </label>
-          <select
-            value={beds}
-            onChange={(e) => setBeds(e.target.value)}
-            style={selectStyle}
-          >
-            {BED_OPTIONS.map((b) => (
-              <option key={b.value} value={b.value}>
-                {b.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FilterSelect
+          label="Bedrooms"
+          value={beds}
+          options={BED_OPTIONS}
+          onChange={setBeds}
+        />
 
         {/* Reset */}
         <button
@@ -199,7 +151,7 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
 
       {/* Count */}
       <div
-        className="max-w-[1100px] mx-auto mb-6 text-[0.9rem]"
+        className="max-w-275 mx-auto mb-6 text-[0.9rem]"
         style={{ color: "rgba(255,255,255,0.5)" }}
       >
         Showing{" "}
@@ -209,7 +161,7 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
 
       {/* Grid */}
       <div
-        className="max-w-[1300px] mx-auto mb-6"
+        className="max-w-325 mx-auto mb-6"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",

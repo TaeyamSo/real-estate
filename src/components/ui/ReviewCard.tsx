@@ -7,16 +7,16 @@ interface ReviewCardProps {
 export default function ReviewCard({ review }: ReviewCardProps) {
   return (
     <div
-      className="flex-shrink-0 rounded-[12px] p-5 text-left snap-start"
+      className="shrink-0 rounded-xl p-5 text-left snap-start"
       style={{
         flex: "0 0 300px",
         background: "white",
         boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
       }}
     >
-      <div className="flex items-center gap-[15px] mb-[15px]">
+      <div className="flex items-center gap-3.75 mb-3.75">
         <div
-          className="rounded-full flex items-center justify-center font-bold text-white text-lg flex-shrink-0"
+          className="rounded-full flex items-center justify-center font-bold text-white text-lg shrink-0"
           style={{
             width: 50,
             height: 50,

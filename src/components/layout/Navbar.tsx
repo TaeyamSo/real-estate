@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -20,14 +20,35 @@ interface NavbarProps {
 export default function Navbar({ onContactOpen }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
   const router = useRouter();
   const pathname = usePathname();
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const sectionIds = ["home", "about", "residents", "owners", "reviews"];
+    const elements = sectionIds.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+    observerRef.current?.disconnect();
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length > 0) {
+          setActiveSection(`#${visible[0].target.id}`);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    elements.forEach((el) => observerRef.current!.observe(el));
+    return () => observerRef.current?.disconnect();
+  }, [pathname]);
 
   const NAV_HEIGHT = 83;
 
@@ -63,14 +84,14 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
         transition: "box-shadow 0.3s",
       }}
     >
-      <div className="flex items-center justify-between px-[5%] py-[15px]">
+      <div className="flex items-center justify-between px-[5%] py-3.75">
         {/* Logo */}
         <button
           onClick={() => handleNavClick("#home")}
-          className="flex items-center gap-[15px] cursor-pointer bg-transparent border-none"
+          className="flex items-center gap-3.75 cursor-pointer bg-transparent border-none"
         >
           <div
-            className="rounded-full border-2 overflow-hidden flex-shrink-0"
+            className="rounded-full border-2 overflow-hidden shrink-0"
             style={{
               width: 50,
               height: 50,
@@ -96,18 +117,25 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="text-white font-bold text-[0.75rem] uppercase tracking-wide ml-[18px] cursor-pointer bg-transparent border-none transition-colors duration-200 hover:text-[#C5A021]"
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive =
+              link.href === "/units"
+                ? pathname === "/units"
+                : pathname === "/" && activeSection === link.href;
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="font-bold text-[0.75rem] uppercase tracking-wide ml-4.5 cursor-pointer bg-transparent border-none transition-colors duration-200 hover:text-[#C5A021]"
+                style={{ color: isActive ? "#C5A021" : "white" }}
+              >
+                {link.label}
+              </button>
+            );
+          })}
           <button
             onClick={() => onContactOpen("tenant")}
-            className="ml-[22px] font-black text-[0.75rem] uppercase tracking-[1px] px-5 py-[10px] rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-150"
+            className="ml-5.5 font-black text-[0.75rem] uppercase tracking-[1px] px-5 py-2.5 rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-150"
             style={{
               background: "linear-gradient(135deg, #C5A021, #F0D060, #C5A021, #A88010)",
               backgroundSize: "300% 300%",
@@ -122,7 +150,7 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
 
         {/* Hamburger */}
         <button
-          className="flex md:hidden flex-col gap-[5px] cursor-pointer bg-transparent border-none p-2"
+          className="flex md:hidden flex-col gap-1.25 cursor-pointer bg-transparent border-none p-2"
           aria-label="Toggle menu"
           onClick={() => setMenuOpen((o) => !o)}
         >
@@ -166,15 +194,22 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
         }}
       >
         <div className="flex flex-col px-[5%] py-2">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="text-white font-bold text-[0.85rem] uppercase py-[14px] text-left cursor-pointer bg-transparent border-none border-b border-white/10 last:border-b-0 transition-colors hover:text-[#C5A021]"
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive =
+              link.href === "/units"
+                ? pathname === "/units"
+                : pathname === "/" && activeSection === link.href;
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="font-bold text-[0.85rem] uppercase py-3.5 text-left cursor-pointer bg-transparent border-none border-b border-white/10 last:border-b-0 transition-colors hover:text-[#C5A021]"
+                style={{ color: isActive ? "#C5A021" : "white" }}
+              >
+                {link.label}
+              </button>
+            );
+          })}
           <button
             onClick={() => {
               setMenuOpen(false);

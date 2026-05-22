@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/providers/LenisProvider";
+import FloatingContactButton from "@/components/ui/FloatingContactButton";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,7 +28,10 @@ export default function RootLayout({
         className="min-h-screen"
         style={{ fontFamily: "var(--font-montserrat), Montserrat, sans-serif" }}
       >
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          {children}
+          <FloatingContactButton />
+        </LenisProvider>
       </body>
     </html>
   );

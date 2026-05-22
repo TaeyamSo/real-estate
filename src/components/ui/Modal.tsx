@@ -148,7 +148,7 @@ function LoadingDots() {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="block w-[6px] h-[6px] rounded-full bg-[#002147]"
+          className="block w-1.5 h-1.5 rounded-full bg-[#002147]"
           animate={{ y: [0, -5, 0] }}
           transition={{
             duration: 0.55,
@@ -290,7 +290,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
   const renderInput = (field: FormField, placeholder: string, inputType?: string) => {
     const icon = fieldIcon(field);
     return (
-      <div className="flex flex-col gap-[3px]">
+      <div className="flex flex-col gap-0.75">
         <div className="relative">
           <input
             name={field}
@@ -318,7 +318,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
     <Dialog.Root open={open} onOpenChange={(o) => !o && onClose()}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className="fixed inset-0 z-[2000] flex items-center justify-center p-4"
+          className="fixed inset-0 z-2000 flex items-center justify-center p-4"
           style={{ background: "rgba(0,13,28,0.82)", backdropFilter: "blur(8px)" }}
         >
           <Dialog.Content
@@ -351,7 +351,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
 
             {/* Badge */}
             <span
-              className="inline-block text-[0.65rem] font-black tracking-[3px] uppercase px-4 py-[5px] rounded-full mb-3"
+              className="inline-block text-[0.65rem] font-black tracking-[3px] uppercase px-4 py-1.25 rounded-full mb-3"
               style={{ background: "#C5A021", color: "#002147" }}
             >
               Contact Us
@@ -374,14 +374,14 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
                 >
                   {/* ── Tab toggle ──────────────────── */}
                   <div
-                    className="grid grid-cols-2 rounded-xl p-[5px] mb-4"
+                    className="grid grid-cols-2 rounded-xl p-1.25 mb-4"
                     style={{ background: "rgba(0,0,0,0.3)" }}
                   >
                     {(["tenant", "owner"] as const).map((t) => (
                       <button
                         key={t}
                         onClick={() => setType(t)}
-                        className="flex items-center justify-center gap-[7px] py-[8px] px-2 rounded-[9px] font-bold text-[0.76rem] cursor-pointer transition-all duration-200 border-none"
+                        className="flex items-center justify-center gap-1.75 py-2 px-2 rounded-[9px] font-bold text-[0.76rem] cursor-pointer transition-all duration-200 border-none"
                         style={{
                           fontFamily: "inherit",
                           background: type === t ? "#C5A021" : "transparent",
@@ -434,7 +434,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
                     </motion.div>
 
                     {/* Message textarea */}
-                    <motion.div variants={fieldVariants} className="flex flex-col gap-[3px]">
+                    <motion.div variants={fieldVariants} className="flex flex-col gap-0.75">
                       <div className="relative">
                         <textarea
                           name="message"
@@ -466,7 +466,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
                       disabled={isSubmitting}
                       whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                       whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
-                      className="flex items-center justify-center gap-2 py-[11px] px-6 rounded-xl font-black tracking-[1px] mt-1"
+                      className="flex items-center justify-center gap-2 py-2.75 px-6 rounded-xl font-black tracking-[1px] mt-1"
                       style={{
                         background: isSubmitting ? "rgba(197,160,33,0.72)" : "#C5A021",
                         color: "#002147",
@@ -487,7 +487,7 @@ export default function Modal({ open, defaultType, onClose }: ModalProps) {
                             transition={{ duration: 0.15 }}
                             className="flex items-center gap-2"
                           >
-                            <span className="flex items-center gap-[5px]">
+                            <span className="flex items-center gap-1.25">
                               <LoadingDots />
                             </span>
                             Sending

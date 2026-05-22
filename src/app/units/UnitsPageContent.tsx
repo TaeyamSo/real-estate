@@ -2,13 +2,13 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowLeft, SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Modal from "@/components/ui/Modal";
 import UnitCard from "@/components/ui/UnitCard";
 import UnitDetailModal from "@/components/ui/UnitDetailModal";
+import FilterSelect from "@/components/ui/FilterSelect";
 import type { Unit } from "@/types";
 
 const PRICE_RANGES = [
@@ -47,6 +47,10 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
     () => ["any", ...Array.from(new Set(units.map((u) => u.city))).sort()],
     [units]
   );
+  const cityOptions = useMemo(
+    () => cities.map((c) => ({ value: c, label: c === "any" ? "All Locations" : c })),
+    [cities]
+  );
   const [city, setCity] = useState("any");
   const [price, setPrice] = useState("any");
   const [beds, setBeds] = useState("any");
@@ -70,21 +74,6 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
     });
   }, [units, city, price, beds]);
 
-  const selectStyle: React.CSSProperties = {
-    padding: "12px 14px",
-    borderRadius: 12,
-    border: "1.5px solid rgba(255,255,255,0.18)",
-    background: "rgba(255,255,255,0.08)",
-    color: "white",
-    fontWeight: 700,
-    fontFamily: "inherit",
-    fontSize: "0.88rem",
-    cursor: "pointer",
-    outline: "none",
-    width: "100%",
-    appearance: "none" as React.CSSProperties["appearance"],
-  };
-
   const hasActiveFilters = city !== "any" || price !== "any" || beds !== "any";
 
   return (
@@ -99,22 +88,14 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
             borderBottom: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          <div className="max-w-[1300px] mx-auto">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-[0.75rem] font-bold uppercase tracking-[2px] mb-6 transition-colors duration-200 hover:text-[#C5A021] no-underline"
-              style={{ color: "rgba(255,255,255,0.45)" }}
-            >
-              <ArrowLeft size={13} /> Back to Home
-            </Link>
-
+          <div className="max-w-325 mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <span
-                className="inline-block text-[0.65rem] font-black tracking-[4px] uppercase px-4 py-[6px] rounded-full mb-4"
+                className="inline-block text-[0.65rem] font-black tracking-[4px] uppercase px-4 py-1.5 rounded-full mb-4"
                 style={{ background: "#C5A021", color: "#002147" }}
               >
                 Central Ohio
@@ -125,7 +106,7 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
               >
                 Available Units
               </h1>
-              <p className="text-[0.95rem] max-w-[520px]" style={{ color: "rgba(255,255,255,0.55)" }}>
+              <p className="text-[0.95rem] max-w-130" style={{ color: "rgba(255,255,255,0.55)" }}>
                 Browse our current vacancies across Columbus, Hilliard, and Worthington. Click any unit to view full details and apply.
               </p>
             </motion.div>
@@ -134,7 +115,7 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
 
         {/* ── Filters ── */}
         <section style={{ padding: "24px 5% 0" }}>
-          <div className="max-w-[1300px] mx-auto">
+          <div className="max-w-325 mx-auto">
             {/* Mobile filter toggle */}
             <button
               className="md:hidden flex items-center gap-2 text-[0.8rem] font-black uppercase tracking-[1.5px] px-4 py-3 rounded-xl mb-4 cursor-pointer transition-all duration-200"
@@ -159,46 +140,28 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
               }}
             >
               {/* Location */}
-              <div className="flex flex-col gap-[5px] flex-1">
-                <label className="text-[0.65rem] font-black tracking-[2px] uppercase" style={{ color: "#C5A021" }}>
-                  Location
-                </label>
-                <select value={city} onChange={(e) => setCity(e.target.value)} style={selectStyle}>
-                  {cities.map((c) => (
-                    <option key={c} value={c} style={{ background: "#002147" }}>
-                      {c === "any" ? "All Locations" : c}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <FilterSelect
+                label="Location"
+                value={city}
+                options={cityOptions}
+                onChange={setCity}
+              />
 
               {/* Price */}
-              <div className="flex flex-col gap-[5px] flex-1">
-                <label className="text-[0.65rem] font-black tracking-[2px] uppercase" style={{ color: "#C5A021" }}>
-                  Price Range
-                </label>
-                <select value={price} onChange={(e) => setPrice(e.target.value)} style={selectStyle}>
-                  {PRICE_RANGES.map((p) => (
-                    <option key={p.value} value={p.value} style={{ background: "#002147" }}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <FilterSelect
+                label="Price Range"
+                value={price}
+                options={PRICE_RANGES}
+                onChange={setPrice}
+              />
 
               {/* Bedrooms */}
-              <div className="flex flex-col gap-[5px] flex-1">
-                <label className="text-[0.65rem] font-black tracking-[2px] uppercase" style={{ color: "#C5A021" }}>
-                  Bedrooms
-                </label>
-                <select value={beds} onChange={(e) => setBeds(e.target.value)} style={selectStyle}>
-                  {BED_OPTIONS.map((b) => (
-                    <option key={b.value} value={b.value} style={{ background: "#002147" }}>
-                      {b.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <FilterSelect
+                label="Bedrooms"
+                value={beds}
+                options={BED_OPTIONS}
+                onChange={setBeds}
+              />
 
               {/* Reset */}
               <button
@@ -222,7 +185,7 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
         </section>
 
         {/* ── Results count ── */}
-        <div className="max-w-[1300px] mx-auto px-[5%] md:px-0" style={{ marginBottom: 20 }}>
+        <div className="max-w-325 mx-auto px-[5%] md:px-0" style={{ marginBottom: 20 }}>
           <p className="text-[0.78rem] font-bold" style={{ color: "rgba(255,255,255,0.4)" }}>
             {filtered.length} {filtered.length === 1 ? "unit" : "units"} found
           </p>
@@ -230,7 +193,7 @@ export default function UnitsPageContent({ units }: UnitsPageContentProps) {
 
         {/* ── Grid ── */}
         <section style={{ padding: "0 5% 80px" }}>
-          <div className="max-w-[1300px] mx-auto">
+          <div className="max-w-325 mx-auto">
             {filtered.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                 {filtered.map((unit, i) => (
