@@ -18,7 +18,7 @@ function StatCounter({ stat, inView }: { stat: { value: string; label: string };
   return (
     <div className="rounded-2xl p-3 text-center" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(197,160,33,0.25)" }}>
       <div className="text-[1.4rem] font-black leading-none" style={{ color: "#C5A021" }}>{display}</div>
-      <div className="text-[0.72rem] mt-[6px] tracking-[1px] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>{stat.label}</div>
+      <div className="text-[0.72rem] mt-1.5 tracking-[1px] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>{stat.label}</div>
     </div>
   );
 }
@@ -70,7 +70,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
       >PNE</span>
 
       <div
-        className="relative z-10 grid gap-[40px] items-center w-full max-w-[1300px] mx-auto"
+        className="relative z-10 grid gap-10 items-center w-full max-w-325 mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 500px), 1fr))" }}
       >
         {/* Image â€” tilted & floating */}
@@ -87,7 +87,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             alt="PNE Property Management Team"
             width={900}
             height={380}
-            className="w-full object-cover rounded-[24px]"
+            className="w-full object-cover rounded-3xl"
             style={{ height: 380 }}
             loading="lazy"
           />
@@ -108,7 +108,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
         {/* Content */}
         <div className="text-white">
           <motion.span
-            className="inline-block text-[0.7rem] font-black tracking-[4px] uppercase px-[18px] py-[6px] rounded-full mb-[22px]"
+            className="inline-block text-[0.7rem] font-black tracking-[4px] uppercase px-4.5 py-1.5 rounded-full mb-5.5"
             style={{ background: "#C5A021", color: "#002147" }}
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
           <WordReveal
             text="PNE Property Management was founded with one mission: to make property ownership and renting a seamless, stress-free experience for everyone involved. Based in Grove City, Ohio, we've spent years building deep roots across Central Ohio's communities."
             delay={0.3}
-            className="leading-[1.9] mb-[18px]"
+            className="leading-[1.9] mb-4.5"
             style={{ color: "rgba(255,255,255,0.75)" }}
           />
           <WordReveal

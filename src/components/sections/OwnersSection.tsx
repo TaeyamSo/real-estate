@@ -16,7 +16,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
       style={{ height: "100vh", padding: "83px 5% 50px", background: "#f8fafc", overflow: "hidden" }}
     >
       <div
-        className="grid gap-[35px] items-center w-full max-w-[1300px] mx-auto"
+        className="grid gap-8.75 items-center w-full max-w-325 mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))" }}
       >
         {/* Content â€” left on desktop */}
@@ -43,7 +43,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
           </motion.p>
 
           <motion.div
-            className="flex flex-col gap-[10px] mb-6"
+            className="flex flex-col gap-2.5 mb-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -52,7 +52,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
             {ownerServices.map((service) => (
               <motion.div
                 key={service.title}
-                className="flex gap-[14px] rounded-xl p-[12px_16px]"
+                className="flex gap-3.5 rounded-xl p-[12px_16px]"
                 style={{ background: "white", borderLeft: "4px solid #002147" }}
                 variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } } }}
               >
@@ -67,7 +67,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
 
           <motion.button
             onClick={() => onContactOpen("owner")}
-            className="px-[35px] py-[15px] rounded-full font-bold text-[0.9rem] transition-all duration-300 cursor-pointer"
+            className="px-8.75 py-3.75 rounded-full font-bold text-[0.9rem] transition-all duration-300 cursor-pointer"
             style={{ border: "2px solid #002147", background: "transparent", color: "#002147" }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
             alt="Property owners reviewing portfolio"
             width={800}
             height={380}
-            className="w-full object-cover rounded-[24px]"
+            className="w-full object-cover rounded-3xl"
             style={{ height: 380, boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
             loading="lazy"
           />

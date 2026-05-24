@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Modal from "@/components/ui/Modal";
 
 export default function FloatingContactButton() {
   const [modalOpen, setModalOpen] = useState(false);
+  const pathname = usePathname();
+  if (pathname?.startsWith("/realestateadmins")) return null;
 
   return (
     <>
