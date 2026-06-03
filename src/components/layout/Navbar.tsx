@@ -33,7 +33,7 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
 
   useEffect(() => {
     if (pathname !== "/") return;
-    const sectionIds = ["home", "about", "residents", "owners", "reviews"];
+    const sectionIds = ["home", "about", "residents", "owners", "units", "reviews"];
     const elements = sectionIds.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
 
     observerRef.current?.disconnect();
@@ -56,6 +56,11 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
     setMenuOpen(false);
     if (href.startsWith("/")) {
       router.push(href);
+      return;
+    }
+    // On /units page, send user back home at the target section
+    if (pathname === "/units") {
+      router.push("/" + href);
       return;
     }
     if (href === "#home") {
@@ -93,14 +98,14 @@ export default function Navbar({ onContactOpen }: NavbarProps) {
           <div
             className="rounded-full border-2 overflow-hidden shrink-0"
             style={{
-              width: 50,
-              height: 50,
+              width: 60,
+              height: 60,
               borderColor: "#C5A021",
               background: "white",
             }}
           >
             <Image
-              src="/logo.png"
+              src="/newlogo2.png"
               alt="PNE Property Management Logo"
               width={50}
               height={50}

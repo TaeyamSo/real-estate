@@ -6,7 +6,7 @@ import { motion, useInView, type Transition } from "framer-motion";
 import { aboutStats } from "@/data/static";
 import { useCounter } from "@/hooks/useCounter";
 
-// Parse "200+" â†’ { num: 200, suffix: "+" }
+// Parse "200+" -> { num: 200, suffix: "+" }
 function parseStat(value: string) {
   const match = value.match(/^(\d+)(.*)$/);
   return match ? { num: parseInt(match[1]), suffix: match[2] } : { num: 0, suffix: value };
@@ -59,13 +59,13 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
   return (
     <section
       id="about"
-      className="relative overflow-hidden flex items-center"
-      style={{ background: "#002147", height: "100vh", padding: "83px 5% 50px" }}
+      className="relative overflow-hidden flex items-start md:items-center"
+      style={{ background: "#002147", minHeight: "100vh", padding: "83px 5% 50px" }}
     >
       {/* Watermark */}
       <span
         className="absolute pointer-events-none select-none font-black leading-none"
-        style={{ right: "-2%", top: "50%", transform: "translateY(-50%)", fontSize: "22rem", color: "rgba(255,255,255,0.03)" }}
+        style={{ right: "-2%", top: "50%", transform: "translateY(-50%)", fontSize: "clamp(6rem, 22vw, 22rem)", color: "rgba(255,255,255,0.03)" }}
         aria-hidden="true"
       >PNE</span>
 
@@ -73,7 +73,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
         className="relative z-10 grid gap-10 items-center w-full max-w-325 mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 500px), 1fr))" }}
       >
-        {/* Image â€” tilted & floating */}
+        {/* Image - tilted & floating */}
         <motion.div
           className="relative"
           initial={{ opacity: 0, x: -60, rotate: -5 }}
@@ -87,11 +87,10 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             alt="PNE Property Management Team"
             width={900}
             height={380}
-            className="w-full object-cover rounded-3xl"
-            style={{ height: 380 }}
+            className="w-full object-cover rounded-3xl h-[220px] md:h-[380px]"
             loading="lazy"
           />
-          {/* Gold badge â€” spring bounce */}
+          {/* Gold badge - spring bounce */}
           <motion.div
             className="absolute rounded-[20px] text-center shadow-2xl"
             initial={{ scale: 0, opacity: 0 }}
@@ -118,7 +117,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             About Us
           </motion.span>
 
-          {/* Heading â€” word-by-word */}
+          {/* Heading - word-by-word */}
           <motion.h2
             className="font-black leading-[1.1] mb-4"
             style={{ fontSize: "2rem", color: "white" }}
@@ -143,7 +142,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             style={{ color: "rgba(255,255,255,0.75)" }}
           />
           <WordReveal
-            text="We combine decades of hands-on real estate expertise with modern technology and a people-first approach â€” bringing the same dedication, transparency, and professionalism to every interaction."
+            text="We combine decades of hands-on real estate expertise with modern technology and a people-first approach — bringing the same dedication, transparency, and professionalism to every interaction."
             delay={0.5}
             className="leading-[1.9] mb-[18px]"
             style={{ color: "rgba(255,255,255,0.75)" }}
@@ -167,15 +166,10 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#C5A021"; (e.currentTarget as HTMLButtonElement).style.color = "#002147"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = "#C5A021"; }}
           >
-            Get in Touch â†’
+            Get in Touch →
           </motion.button>
         </div>
       </div>
     </section>
   );
-}
-
-
-interface AboutSectionProps {
-  onContactOpen: (type: "tenant" | "owner") => void;
 }

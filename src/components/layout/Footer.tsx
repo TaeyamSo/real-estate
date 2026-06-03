@@ -67,7 +67,7 @@ export default function Footer() {
               }}
             >
               <Image
-                src="/logo.png"
+                src="/newlogo2.png"
                 alt="PNE Logo"
                 width={56}
                 height={56}

@@ -40,6 +40,29 @@ export default function UnitDetailModal({ unit, onClose }: UnitDetailModalProps)
   const images = unit?.images?.length ? unit.images : unit?.imageUrl ? [unit.imageUrl] : [];
 
   useEffect(() => {
+    if (!open) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevHtmlOverscroll = html.style.overscrollBehavior;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyOverscroll = body.style.overscrollBehavior;
+
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      html.style.overscrollBehavior = prevHtmlOverscroll;
+      body.style.overflow = prevBodyOverflow;
+      body.style.overscrollBehavior = prevBodyOverscroll;
+    };
+  }, [open]);
+
+  useEffect(() => {
     setCarouselIndex(0);
   }, [unit?.id]);
 
@@ -319,10 +342,14 @@ export default function UnitDetailModal({ unit, onClose }: UnitDetailModalProps)
                             About this unit
                           </p>
                           <div
+                            onWheelCapture={(e) => e.stopPropagation()}
+                            onTouchMoveCapture={(e) => e.stopPropagation()}
                             style={{
                               maxHeight: 90,
                               overflowY: "auto",
                               paddingRight: 4,
+                              overscrollBehavior: "contain",
+                              WebkitOverflowScrolling: "touch",
                             }}
                           >
                             <p

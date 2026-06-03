@@ -8,14 +8,14 @@ export default function ResidentsSection() {
   return (
     <section
       id="residents-detail"
-      className="flex items-center"
-      style={{ height: "100vh", padding: "83px 5% 50px", background: "white", overflow: "hidden" }}
+      className="flex items-start md:items-center"
+      style={{ minHeight: "100vh", padding: "83px 5% 50px", background: "white", overflowX: "hidden" }}
     >
       <div
         className="grid gap-[35px] items-center w-full max-w-[1300px] mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))" }}
       >
-        {/* Image â€” slides in from left with tilt */}
+        {/* Image - slides in from left with tilt */}
         <motion.div
           className="relative"
           style={{ isolation: "isolate" }}
@@ -29,11 +29,11 @@ export default function ResidentsSection() {
             alt="Happy residents at home"
             width={900}
             height={380}
-            className="w-full object-cover rounded-[24px]"
-            style={{ height: 380, boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
+            className="w-full object-cover rounded-[24px] h-[220px] md:h-[380px]"
+            style={{ boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
             loading="lazy"
           />
-          {/* Gold border frame â€” expands from corner */}
+          {/* Gold border frame - expands from corner */}
           <motion.div
             className="absolute pointer-events-none"
             initial={{ scale: 0, transformOrigin: "top right" }}

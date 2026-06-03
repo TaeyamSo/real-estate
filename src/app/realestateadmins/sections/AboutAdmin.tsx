@@ -14,9 +14,7 @@ interface AboutData {
   heading: string;
   paragraph1: string;
   paragraph2: string;
-  image1: MediaField;
-  image2: MediaField;
-  image3: MediaField;
+  image: MediaField;
   stats: [StatItem, StatItem, StatItem];
 }
 
@@ -27,9 +25,7 @@ const DEFAULTS: AboutData = {
     "PNE Property Management was founded with one mission: to make property ownership and renting a seamless, stress-free experience for everyone involved. Based in Grove City, Ohio, we've spent years building deep roots across Central Ohio's communities.",
   paragraph2:
     "We combine decades of hands-on real estate expertise with modern technology and a people-first approach — bringing the same dedication, transparency, and professionalism to every interaction.",
-  image1: { url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80", type: "image" },
-  image2: { url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=700&q=80", type: "image" },
-  image3: { url: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=700&q=80", type: "image" },
+  image: { url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80", type: "image" },
   stats: [
     { value: "200+", label: "Units Managed" },
     { value: "10+", label: "Years Experience" },
@@ -81,12 +77,12 @@ export default function AboutAdmin({ onSave }: Props) {
     [data]
   );
 
-  const setImage = useCallback((key: "image1" | "image2" | "image3", val: MediaField) => {
+  const setImage = useCallback((key: "image", val: MediaField) => {
     setData((prev) => ({ ...prev, [key]: val }));
     setImageErrors((prev) => ({ ...prev, [key]: "" }));
   }, []);
 
-  const blurImage = useCallback((key: "image1" | "image2" | "image3") => {
+  const blurImage = useCallback((key: "image") => {
     const err = VALIDATORS.url(data[key].url);
     setImageErrors((prev) => ({ ...prev, [key]: err }));
   }, [data]);
@@ -119,7 +115,7 @@ export default function AboutAdmin({ onSave }: Props) {
       newTextErrors[key] = err;
     });
 
-    (["image1", "image2", "image3"] as const).forEach((key) => {
+    (["image"] as const).forEach((key) => {
       const err = VALIDATORS.url(data[key].url);
       if (err) hasErr = true;
       newImageErrors[key] = err;
@@ -150,7 +146,7 @@ export default function AboutAdmin({ onSave }: Props) {
   return (
     <SectionShell
       title="About Section"
-      description="Edit the about section text, image collage, and key stats displayed on the homepage."
+      description="Edit the about section text, image, and key stats displayed on the homepage."
       icon={<AboutIcon />}
       onSave={handleSave}
       hasErrors={hasErrors}
@@ -204,33 +200,15 @@ export default function AboutAdmin({ onSave }: Props) {
       </FormCard>
 
       {/* Images */}
-      <FormCard title="Image Collage (3 images)">
+      <FormCard title="About Image">
         <MediaInput
-          label="Image 1 — Top Left"
+          label="About Section Image"
           required
-          value={data.image1}
-          onChange={(v) => setImage("image1", v)}
-          onBlur={() => blurImage("image1")}
-          error={imageErrors.image1}
-          hint="Displayed top-left in the collage. Recommended: 700×500px."
-        />
-        <MediaInput
-          label="Image 2 — Center Right"
-          required
-          value={data.image2}
-          onChange={(v) => setImage("image2", v)}
-          onBlur={() => blurImage("image2")}
-          error={imageErrors.image2}
-          hint="Displayed center-right. Recommended: 700×500px."
-        />
-        <MediaInput
-          label="Image 3 — Bottom Left"
-          required
-          value={data.image3}
-          onChange={(v) => setImage("image3", v)}
-          onBlur={() => blurImage("image3")}
-          error={imageErrors.image3}
-          hint="Displayed bottom-left. Recommended: 700×500px."
+          value={data.image}
+          onChange={(v) => setImage("image", v)}
+          onBlur={() => blurImage("image")}
+          error={imageErrors.image}
+          hint="Primary About image. Recommended: 1200×900px."
         />
       </FormCard>
 

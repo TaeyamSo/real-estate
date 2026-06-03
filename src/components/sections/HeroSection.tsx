@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Transition } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const NAV_HEIGHT = 83;
 
@@ -16,6 +17,8 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onContactOpen }: HeroSectionProps) {
+  const router = useRouter();
+
   const scrollTo = (href: string) => {
     if (href === "#home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
     const el = document.querySelector(href);
@@ -83,7 +86,7 @@ export default function HeroSection({ onContactOpen }: HeroSectionProps) {
           }}
         >
           {[
-            { label: "View Available Units", action: () => scrollTo("#units"), gold: true },
+            { label: "View Available Units", action: () => router.push("/units"), gold: true },
             { label: "List Your Property", action: () => onContactOpen("owner"), gold: false },
             { label: "About Us", action: () => scrollTo("#about"), gold: false, outline: true },
           ].map(({ label, action, gold, outline }) => (

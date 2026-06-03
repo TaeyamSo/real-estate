@@ -12,14 +12,14 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
   return (
     <section
       id="owners-detail"
-      className="flex items-center"
-      style={{ height: "100vh", padding: "83px 5% 50px", background: "#f8fafc", overflow: "hidden" }}
+      className="flex items-start md:items-center"
+      style={{ minHeight: "100vh", padding: "83px 5% 50px", background: "#f8fafc", overflowX: "hidden" }}
     >
       <div
         className="grid gap-8.75 items-center w-full max-w-325 mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))" }}
       >
-        {/* Content â€” left on desktop */}
+        {/* Content - left on desktop */}
         <div>
           <motion.h2
             className="font-black mb-1"
@@ -80,7 +80,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
           </motion.button>
         </div>
 
-        {/* Image â€” slides in from right with tilt */}
+        {/* Image - slides in from right with tilt */}
         <motion.div
           className="relative"
           style={{ isolation: "isolate" }}
@@ -94,8 +94,8 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
             alt="Property owners reviewing portfolio"
             width={800}
             height={380}
-            className="w-full object-cover rounded-3xl"
-            style={{ height: 380, boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
+            className="w-full object-cover rounded-3xl h-[220px] md:h-[380px]"
+            style={{ boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
             loading="lazy"
           />
           <motion.div

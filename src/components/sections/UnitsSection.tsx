@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import UnitCard from "@/components/ui/UnitCard";
+import UnitDetailModal from "@/components/ui/UnitDetailModal";
 import FilterSelect from "@/components/ui/FilterSelect";
 import type { Unit } from "@/types";
 
@@ -26,6 +28,8 @@ interface UnitsSectionProps {
 }
 
 export default function UnitsSection({ units }: UnitsSectionProps) {
+  const [selectedUnit, setSelectedUnit] = useState<Unit | null>(null);
+
   const cities = useMemo(
     () => ["any", ...Array.from(new Set(units.map((u) => u.city))).sort()],
     [units]
@@ -74,12 +78,38 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h2
-          className="font-black text-[1.8rem] mb-1"
-          style={{ color: "white" }}
+        <Link
+          href="/units"
+          aria-label="Open full Available Units page"
+          className="group inline-flex items-center gap-2 mb-1 no-underline"
         >
-          Available Units
-        </h2>
+          <h2
+            className="font-black text-[1.8rem]"
+            style={{ color: "white" }}
+          >
+            Available Units
+          </h2>
+          <span
+            className="inline-flex w-8 h-8 items-center justify-center rounded-full border-[1.5px] border-[rgba(197,160,33,0.75)] bg-[rgba(197,160,33,0.06)] text-[#C5A021] transition-all duration-200 group-hover:scale-105 group-hover:border-[#C5A021] group-hover:bg-[#C5A021] group-hover:text-[#002147]"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 17L17 7M17 7H9M17 7V15"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </Link>
         <p className="text-[0.9rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
           Browse our current vacancies across Central Ohio. Filter to find your
           perfect fit.
@@ -185,7 +215,7 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.4, ease: "easeOut", delay: Math.min(i * 0.06, 0.4) }}
             >
-              <UnitCard unit={unit} />
+              <UnitCard unit={unit} onClick={() => setSelectedUnit(unit)} />
             </motion.div>
           ))
         )}
@@ -211,6 +241,11 @@ export default function UnitsSection({ units }: UnitsSectionProps) {
           View All Listings &amp; Apply Online →
         </a>
       </div>
+
+      <UnitDetailModal
+        unit={selectedUnit}
+        onClose={() => setSelectedUnit(null)}
+      />
     </section>
   );
 }
