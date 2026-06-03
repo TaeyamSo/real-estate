@@ -94,7 +94,7 @@ export default function OwnersSection({ onContactOpen }: OwnersSectionProps) {
             alt="Property owners reviewing portfolio"
             width={800}
             height={380}
-            className="w-full object-cover rounded-3xl h-[220px] md:h-[380px]"
+            className="w-full object-cover rounded-3xl h-55 md:h-95"
             style={{ boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
             loading="lazy"
           />

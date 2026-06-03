@@ -53,7 +53,7 @@ const serviceAreas = [
 export default function Footer() {
   return (
     <footer style={{ background: "#000d1c", color: "#cbd5e1" }}>
-      <div className="max-w-[1300px] mx-auto px-[5%] pt-[70px] pb-[30px]">
+      <div className="max-w-325 mx-auto px-[5%] pt-17.5 pb-7.5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div>
@@ -81,7 +81,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3 items-start mb-4">
               <div
-                className="flex items-center justify-center flex-shrink-0 font-black text-[0.65rem] tracking-[1px]"
+                className="flex items-center justify-center shrink-0 font-black text-[0.65rem] tracking-[1px]"
                 style={{
                   width: 44,
                   height: 44,
@@ -134,14 +134,14 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h5
-              className="text-[0.8rem] tracking-[2px] uppercase mb-[18px] font-black"
+              className="text-[0.8rem] tracking-[2px] uppercase mb-4.5 font-black"
               style={{ color: "#C5A021" }}
             >
               Quick Links
             </h5>
             <ul className="list-none p-0 m-0">
               {quickLinks.map((link) => (
-                <li key={link.href} className="mb-[10px]">
+                <li key={link.href} className="mb-2.5">
                   <a
                     href={link.href}
                     className="text-sm transition-colors duration-200 hover:text-[#C5A021]"
@@ -157,14 +157,14 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h5
-              className="text-[0.8rem] tracking-[2px] uppercase mb-[18px] font-black"
+              className="text-[0.8rem] tracking-[2px] uppercase mb-4.5 font-black"
               style={{ color: "#C5A021" }}
             >
               Services
             </h5>
             <ul className="list-none p-0 m-0">
               {services.map((s) => (
-                <li key={s} className="mb-[10px] text-sm">
+                <li key={s} className="mb-2.5 text-sm">
                   {s}
                 </li>
               ))}
@@ -174,7 +174,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h5
-              className="text-[0.8rem] tracking-[2px] uppercase mb-[18px] font-black"
+              className="text-[0.8rem] tracking-[2px] uppercase mb-4.5 font-black"
               style={{ color: "#C5A021" }}
             >
               Contact Us
@@ -189,7 +189,7 @@ export default function Footer() {
             </h5>
             <ul className="list-none p-0 m-0">
               {serviceAreas.map((area) => (
-                <li key={area} className="mb-[8px] text-sm">
+                <li key={area} className="mb-2 text-sm">
                   {area}
                 </li>
               ))}

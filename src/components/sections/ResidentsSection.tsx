@@ -12,7 +12,7 @@ export default function ResidentsSection() {
       style={{ minHeight: "100vh", padding: "83px 5% 50px", background: "white", overflowX: "hidden" }}
     >
       <div
-        className="grid gap-[35px] items-center w-full max-w-[1300px] mx-auto"
+        className="grid gap-8.75 items-center w-full max-w-325 mx-auto"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))" }}
       >
         {/* Image - slides in from left with tilt */}
@@ -29,7 +29,7 @@ export default function ResidentsSection() {
             alt="Happy residents at home"
             width={900}
             height={380}
-            className="w-full object-cover rounded-[24px] h-[220px] md:h-[380px]"
+            className="w-full object-cover rounded-3xl h-55 md:h-95"
             style={{ boxShadow: "0 25px 50px rgba(0,33,71,0.15)" }}
             loading="lazy"
           />
@@ -68,7 +68,7 @@ export default function ResidentsSection() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col gap-[10px] mb-6"
+            className="flex flex-col gap-2.5 mb-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -77,7 +77,7 @@ export default function ResidentsSection() {
             {residentServices.map((service) => (
               <motion.div
                 key={service.title}
-                className="flex gap-[14px] rounded-xl p-[12px_16px]"
+                className="flex gap-3.5 rounded-xl p-[12px_16px]"
                 style={{ background: "#f8fafc", borderLeft: "4px solid #C5A021" }}
                 variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } } }}
               >
@@ -97,7 +97,7 @@ export default function ResidentsSection() {
               const el = document.querySelector("#units");
               if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 83, behavior: "smooth" });
             }}
-            className="inline-block px-[35px] py-[15px] rounded-full font-bold text-[0.9rem] transition-all duration-300 cursor-pointer no-underline"
+            className="inline-block px-8.75 py-3.75 rounded-full font-bold text-[0.9rem] transition-all duration-300 cursor-pointer no-underline"
             style={{ border: "2px solid #002147", background: "transparent", color: "#002147" }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

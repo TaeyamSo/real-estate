@@ -52,14 +52,14 @@ export default function HeroSection({ onContactOpen }: HeroSectionProps) {
       <div className="relative z-10 px-5 max-w-4xl">
         <motion.div
           {...fadeUp(0.4)}
-          className="inline-block text-[0.7rem] font-black tracking-[5px] uppercase border rounded-full px-5 py-[7px] mb-4"
+          className="inline-block text-[0.7rem] font-black tracking-[5px] uppercase border rounded-full px-5 py-1.75 mb-4"
           style={{ color: "#C5A021", borderColor: "rgba(197,160,33,0.4)" }}
         >
           Central Ohio&apos;s Premier Property Management
         </motion.div>
 
         <motion.h1
-          className="text-white font-black leading-[1.05] mb-[10px]"
+          className="text-white font-black leading-[1.05] mb-2.5"
           style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-2px" }}
         >
           <motion.span className="block" {...fadeUp(0.65)}>PREMIER</motion.span>
@@ -128,7 +128,7 @@ export default function HeroSection({ onContactOpen }: HeroSectionProps) {
         style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.65rem", letterSpacing: "3px" }}
       >
         <div
-          className="w-[2px] h-10 rounded-sm"
+          className="w-0.5 h-10 rounded-sm"
           style={{
             background: "linear-gradient(to bottom, rgba(197,160,33,0.8), transparent)",
             animation: "scrollPulse 1.8s ease-in-out infinite",

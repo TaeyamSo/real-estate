@@ -87,7 +87,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
             alt="PNE Property Management Team"
             width={900}
             height={380}
-            className="w-full object-cover rounded-3xl h-[220px] md:h-[380px]"
+            className="w-full object-cover rounded-3xl h-55 md:h-95"
             loading="lazy"
           />
           {/* Gold badge - spring bounce */}
@@ -144,7 +144,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
           <WordReveal
             text="We combine decades of hands-on real estate expertise with modern technology and a people-first approach — bringing the same dedication, transparency, and professionalism to every interaction."
             delay={0.5}
-            className="leading-[1.9] mb-[18px]"
+            className="leading-[1.9] mb-4.5"
             style={{ color: "rgba(255,255,255,0.75)" }}
           />
 
@@ -157,7 +157,7 @@ export default function AboutSection({ onContactOpen }: AboutSectionProps) {
 
           <motion.button
             onClick={() => onContactOpen("tenant")}
-            className="px-[38px] py-[15px] rounded-full font-bold text-[0.88rem] cursor-pointer transition-all duration-300"
+            className="px-9.5 py-3.75 rounded-full font-bold text-[0.88rem] cursor-pointer transition-all duration-300"
             style={{ border: "2px solid #C5A021", background: "transparent", color: "#C5A021" }}
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
